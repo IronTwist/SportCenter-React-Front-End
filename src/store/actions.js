@@ -2,12 +2,6 @@ export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
 export const GET_LOGIN_START = 'GET_LOGIN_START';
 export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR';
 
-export const GET_PROGRAMS_SUCCESS = 'GET_PROGRAMS_SUCCESS';
-export const GET_PROGRAMS_START = 'GET_PROGRAMS_START';
-export const GET_PROGRAMS_ERROR = 'GET_PROGRAMS_ERROR';
-export const DELETE_PROGRAM = 'DELETE_PROGRAM';
-export const ADD_PROGRAM = 'ADD_PROGRAM';
-
 //************************************************Login
 export const getLoginSuccess = (payload) => ({
     type: GET_LOGIN_SUCCESS,
@@ -23,27 +17,31 @@ export const getLoginError = (error) => ({
     payload: error
 });
 
-//************************************************Programs
-export const getProgramsStart = () => ({
-    type: GET_PROGRAMS_START
+// *******************************************Programs
+
+export const getListStart = (namespace) => ({
+    type: `GET_${namespace}_START`
 });
 
-export const getProgramsSuccess = (payload) => ({
-    type: GET_PROGRAMS_SUCCESS,
+export const getListSuccess =(namespace, payload) => ({
+    type: `GET_${namespace}_SUCCESS`,
     payload
 });
 
-export const getProgramsError = (error) => ({
-    type: GET_PROGRAMS_ERROR,
-        payload: error
+export const getListError = (namespace, error) => ({
+    type: `GET_${namespace}_ERROR`,
+    payload: error
 });
 
-export const deleteProgram = (payload) => ({
-    type: DELETE_PROGRAM,
-    payload
+export const removeItemSuccess = (namespace) => ({
+    type: `REMOVE_${namespace}_SUCCESS`,
 });
 
-export const addNewProgram = (payload) => ({
-   type: ADD_PROGRAM,
-   payload
+export const removeItemError = (namespace, error) => ({
+    type: `REMOVE_${namespace}_ERROR`,
+    payload: error
 });
+
+
+
+

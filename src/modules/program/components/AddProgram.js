@@ -4,7 +4,7 @@ import {Button, Modal, ModalBody, ModalFooter, ModalTitle} from "react-bootstrap
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {DateTimePickerComponent} from "@syncfusion/ej2-react-calendars";
 import {useDispatch} from "react-redux";
-import {addProgramAsync} from "../../../store/asyncActions";
+import {addProgramAsync} from "../store/actionsAsync";
 
 const AddProgram = () => {
     const [isOpen, setIsOpen] = useState(false);

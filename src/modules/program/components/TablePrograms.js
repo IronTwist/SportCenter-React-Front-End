@@ -2,13 +2,13 @@ import React from "react";
 import moment from "moment";
 import {Button} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {deleteProgramAsync} from "../../../store/asyncActions";
+import {deleteProgramAction} from "../store/actions";
 
 const TablePrograms = ({total, items}) => {
     const dispatch = useDispatch();
 
     const deletePr = (id) => {
-        dispatch(deleteProgramAsync(id));
+        dispatch(deleteProgramAction(id));
     }
 
     return(

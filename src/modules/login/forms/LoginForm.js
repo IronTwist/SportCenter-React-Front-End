@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { getLoginResponseAsync } from "../../../store/asyncActions";
-// import {apiEndPoints} from "../../../config/config";
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -15,15 +14,30 @@ export const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={handleLoginSubmit}>
-            {loading && <h2>Loading</h2>}
-            {error && <h2 style={{color: "red"}}>{error}</h2>}
-            <label htmlFor="email">Email: </label>
-            <input type="text" id="email" onChange={(e) => setEmail(e.target.value)}  placeholder="example@email.com" /><br/>
-
-            <label htmlFor="password">Password: </label>
-            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} /><br/>
-            <button type="submit">Login</button>
-        </form>
+    <div className="container">
+        <div className="row justify-content-center align-items-center" style={{height: "100vh"}}>
+            <div className="col-4">
+                <div className="card">
+                    <div className="card-body">
+                        <form onSubmit={handleLoginSubmit} autoComplete="off">
+                            {loading && <h2>Loading</h2>}
+                            {error && <h2 style={{color: "red"}}>{error}</h2>}
+                            <div className="form-group">
+                                <input type="text" id="email" className="form-control"
+                                       onChange={(e) => setEmail(e.target.value)}
+                                       placeholder="example@email.com" /><br/>
+                            </div>
+                            <div className="form-group">
+                                <input type="password" className="form-control" id="password"
+                                       onChange={(e) => setPassword(e.target.value)}
+                                       placeholder="password"/><br/>
+                            </div>
+                            <button type="submit" id="sendlogin" className="btn btn-primary">login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     );
 }
