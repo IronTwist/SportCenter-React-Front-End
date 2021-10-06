@@ -1,25 +1,22 @@
 import {PROGRAMS} from "../data/constants";
 import {apiEndPoints} from "../../../config/config";
-import {deleteItem, getList} from "../../../store/asyncActions";
+import {deleteItem, getList, postData} from "../../../store/asyncActions";
 import store from "../../../store";
 
-export const DELETE_PROGRAM = 'DELETE_PROGRAM';
-export const ADD_PROGRAM = 'ADD_PROGRAM';
-
-
-//************************************************Programs
+//************************************************ Programs
 
 export function getPrograms(data){
+    const url =apiEndPoints.getPrograms + "?page=" + data.page +"&perPage=" + data.perPage;
+
     const headRequest = {
         method: 'GET',
         headers: {}
     }
 
-    return fetch(apiEndPoints.getPrograms, headRequest);
+    return fetch(url, headRequest);
 }
 
 export const getProgramsListAction = getList(PROGRAMS, getPrograms);
-
 
 export function deleteProgramById(id){
     const url = apiEndPoints.deleteProgram + `${id}`;
@@ -46,8 +43,8 @@ export function deleteProgramById(id){
 export const deleteProgramAction = deleteItem(PROGRAMS, deleteProgramById)
 
 export function addProgram(name, startsAt, endsAt, getState){
-    const {login} = getState;
-    const token = 'Bearer '+login.data['token'];
+    const {login} = store.getState();
+    const token = 'Bearer '+ login.data.token;
 
     const headRequest = {
         method: 'POST',
@@ -69,4 +66,4 @@ export function addProgram(name, startsAt, endsAt, getState){
     return fetch(apiEndPoints.addProgram, headRequest);
 }
 
-// export const addProgramAction = postData(PROGRAMS, addProgram);
+export const addProgramAction = postData(PROGRAMS, addProgram);

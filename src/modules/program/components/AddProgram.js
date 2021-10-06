@@ -4,7 +4,7 @@ import {Button, Modal, ModalBody, ModalFooter, ModalTitle} from "react-bootstrap
 import ModalHeader from "react-bootstrap/ModalHeader";
 import {DateTimePickerComponent} from "@syncfusion/ej2-react-calendars";
 import {useDispatch} from "react-redux";
-import {addProgramAsync} from "../store/actionsAsync";
+import {addProgramAction} from "../store/actions";
 
 const AddProgram = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ const AddProgram = () => {
     const closeModal = () => setIsOpen(false);
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addProgramAsync(
+        dispatch(addProgramAction(
             name,
             new Date(startsAt).toISOString().slice(0,19),
             new Date(endsAt).toISOString().slice(0,19)

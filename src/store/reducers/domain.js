@@ -1,5 +1,6 @@
 import {
-    ADD_PROGRAM,
+    ADD_PROGRAM_ERROR,
+    ADD_PROGRAM_SUCCESS,
     GET_PROGRAMS_ERROR,
     GET_PROGRAMS_START,
     GET_PROGRAMS_SUCCESS,
@@ -22,7 +23,6 @@ export const domainReducer = (state = initialState,action) => {
                error: null
            };
        case GET_PROGRAMS_SUCCESS:
-           // console.log(action.payload);
            return {
                loading: false,
                data: action.payload,
@@ -46,13 +46,19 @@ export const domainReducer = (state = initialState,action) => {
                data: state.data.items,
                error: action.payload.error
            };
-       case ADD_PROGRAM:
-           // console.log(state.data.items);
+       case ADD_PROGRAM_SUCCESS:
            return {
                loading: false,
                data: state.data.items,
                error: null
            }
+       case ADD_PROGRAM_ERROR:
+           return {
+               loading: false,
+               data: state.data.items,
+               error: null
+           }
+
        default:
            return state;
    }

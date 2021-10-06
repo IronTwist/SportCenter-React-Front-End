@@ -6,7 +6,6 @@ import {deleteProgramAction} from "../store/actions";
 
 const TablePrograms = ({total, items}) => {
     const dispatch = useDispatch();
-
     const deletePr = (id) => {
         dispatch(deleteProgramAction(id));
     }

@@ -1,5 +1,7 @@
 import {apiEndPoints} from "../config/config";
 import {
+    addItemError,
+    addItemSuccess,
     getListError,
     getListStart,
     getListSuccess,
@@ -41,7 +43,6 @@ export const getList = (namespace, fn) =>
     (...params) =>
         (dispatch) => {
             dispatch(getListStart(namespace));
-
             return fn(...params)
                 .then((response) => response.json())
                 .then((responseJSON) => {
@@ -66,4 +67,20 @@ export const deleteItem = (namespace, fn) =>
                 .catch((error) => {
                     dispatch(removeItemError(namespace, error.message));
                 })
+        };
+
+export const postData = (namespace,fn) =>
+    (...params) =>
+        (dispatch) => {
+            return fn(...params)
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    dispatch(addItemSuccess(namespace, responseJSON))
+                    return responseJSON;
+                })
+                .catch((error) => {
+                    dispatch(addItemError(namespace,error.message));
+                })
+
         }
+

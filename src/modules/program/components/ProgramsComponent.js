@@ -12,7 +12,7 @@ const ProgramsComponent = () => {
 
         const paginationFilter = {
             page: 1,
-            perPage:10
+            perPage: 10
         }
 
         dispatch(getProgramsListAction(paginationFilter));

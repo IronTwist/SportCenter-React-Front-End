@@ -42,6 +42,15 @@ export const removeItemError = (namespace, error) => ({
     payload: error
 });
 
+export const addItemSuccess = (namespace) => ({
+    type: `ADD_${namespace}_SUCCESS`
+});
+
+export const addItemError = (namespace, error) => ({
+    type: `ADD_${namespace}_ERROR`,
+    payload: error
+});
+
 
 
 
