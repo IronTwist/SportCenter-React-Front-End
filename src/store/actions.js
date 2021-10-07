@@ -1,19 +1,15 @@
-export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
-export const GET_LOGIN_START = 'GET_LOGIN_START';
-export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR';
-
 //************************************************Login
-export const getLoginSuccess = (payload) => ({
-    type: GET_LOGIN_SUCCESS,
+export const getLoginSuccess = (namespace, payload) => ({
+    type: `GET_${namespace}_SUCCESS`,
     payload
 });
 
-export const getLoginStart = () => ({
-    type: GET_LOGIN_START
+export const getLoginStart = (namespace) => ({
+    type: `GET_${namespace}_START`
 });
 
-export const getLoginError = (error) => ({
-    type: GET_LOGIN_ERROR,
+export const getLoginError = (namespace, error) => ({
+    type: `GET_${namespace}_ERROR`,
     payload: error
 });
 

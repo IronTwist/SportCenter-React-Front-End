@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 const Navbar = () => {
     const { user } = useSelector((state) => state.login.data);
 
-    return <nav className="navbar navbar-expand-lg navbar-light bg-success">
+    return <nav className="navbar navbar-expand-lg navbar-light bg-warning">
         <div className="container-fluid">
             <a className="navbar-brand" href="/">Health Center</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"

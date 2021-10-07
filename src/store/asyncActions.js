@@ -1,43 +1,25 @@
-import {apiEndPoints} from "../config/config";
 import {
-    addItemError,
-    addItemSuccess,
-    getListError,
-    getListStart,
-    getListSuccess,
-    getLoginError,
-    getLoginStart,
-    getLoginSuccess, removeItemError, removeItemSuccess,
+    addItemError, addItemSuccess,
+    getListError, getListStart, getListSuccess,
+    getLoginError, getLoginStart, getLoginSuccess,
+    removeItemError, removeItemSuccess,
 } from "./actions";
 
-
-export function getLoginResponseAsync(email,password){
-
-    return async function getData(dispatch, getState) {
-        dispatch(getLoginStart());
-
-        try {
-            const response = await fetch(apiEndPoints.login, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-                    "Accept": "*/*",
-                },
-                body: new URLSearchParams({
-                    'email': email,
-                    'password': password,
-                    'grant_type': 'password'
+export const loginResponse = (namespace, fn) =>
+    (...params) =>
+        (dispatch) => {
+            dispatch(getLoginStart(namespace));
+            return fn(...params)
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    dispatch(getLoginSuccess(namespace, responseJSON));
+                    return responseJSON;
                 })
-            });
-
-            const user = await response.json();
-
-            dispatch(getLoginSuccess(user));
-        }catch (error){
-            dispatch(getLoginError(error.message));
+                .catch((error) => {
+                    dispatch(getLoginError(error.message));
+                    return Promise.reject(error);
+                })
         }
-    }
-}
 
 export const getList = (namespace, fn) =>
     (...params) =>
@@ -66,6 +48,7 @@ export const deleteItem = (namespace, fn) =>
                 })
                 .catch((error) => {
                     dispatch(removeItemError(namespace, error.message));
+                    return Promise.reject(error);
                 })
         };
 
@@ -80,6 +63,7 @@ export const postData = (namespace,fn) =>
                 })
                 .catch((error) => {
                     dispatch(addItemError(namespace,error.message));
+                    return Promise.reject(error);
                 })
 
         }

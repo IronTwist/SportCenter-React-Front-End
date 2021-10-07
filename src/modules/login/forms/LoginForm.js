@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getLoginResponseAsync } from "../../../store/asyncActions";
+import {getLoginResponseAction} from "../store/actions";
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ export const LoginForm = () => {
 
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
-        dispatch(getLoginResponseAsync(email, password));
+        dispatch(getLoginResponseAction(email, password));
     }
 
     return (

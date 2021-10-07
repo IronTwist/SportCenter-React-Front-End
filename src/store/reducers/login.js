@@ -1,4 +1,4 @@
-import {GET_LOGIN_SUCCESS, GET_LOGIN_START, GET_LOGIN_ERROR} from "../actions";
+import {GET_LOGIN_ERROR, GET_LOGIN_START, GET_LOGIN_SUCCESS} from "../../modules/login/store/constants";
 
 export const initialState = {
     loading: false,
