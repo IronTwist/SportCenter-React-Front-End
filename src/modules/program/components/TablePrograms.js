@@ -1,7 +1,5 @@
 import moment from "moment";
 import {Button} from "react-bootstrap";
-import {useDispatch} from "react-redux";
-import {deleteProgramAction, getProgramsListAction} from "../store/actions";
 
 const TablePrograms = ({total, items, deleteItem}) => {
 

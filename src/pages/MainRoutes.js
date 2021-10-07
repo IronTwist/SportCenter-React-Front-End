@@ -18,15 +18,37 @@ const ReactRouterSetup = () => {
                 <Route exact path="/home">
                     <Home />
                 </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route exact path="/">
-                    {!!user ? <Redirect to="/home" /> : <Login />}
-                </Route>
-                <Route path="/programs">
-                    <Programs />
-                </Route>
+
+                {!!user ?
+                    <Route exact path="/login">
+                        <Redirect to="/home" />
+                    </Route>
+                    :
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
+                }
+
+                {!!user ?
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    :
+                    <Route exact path="/">
+                        <Redirect to="/login" />
+                    </Route>
+                }
+
+                {!!user ?
+                    <Route path="/programs">
+                        <Programs/>
+                    </Route>
+                    :
+                    <Route path="/programs">
+                        <Redirect to="/login"/>
+                    </Route>
+                }
+
                 <Route path="/about">
                     <About />
                 </Route>
