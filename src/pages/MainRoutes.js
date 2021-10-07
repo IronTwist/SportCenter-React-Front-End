@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from "react";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 
 import Home from './Home';
@@ -7,15 +6,10 @@ import Navbar from "./Navbar";
 import Error from "./Error";
 import Login from "../modules/login/pages/Login";
 import Programs from "../modules/program/pages/Programs";
-import store from "../store";
+import {useSelector} from "react-redux";
 
 const ReactRouterSetup = () => {
-    const {login} = store.getState();
-    const [isLoggedIn,setIsLoggedIn] = useState(false);
-    if(typeof login.data.user !== 'undefined') {
-        console.log(login.data.user);
-        setIsLoggedIn(true);
-    }
+    const {user} = useSelector((store) => store.login.data);
 
     return (
         <Router>
@@ -28,7 +22,7 @@ const ReactRouterSetup = () => {
                     <Login />
                 </Route>
                 <Route exact path="/">
-                    {isLoggedIn ? <Redirect to="/home" /> : <Login />}
+                    {!!user ? <Redirect to="/home" /> : <Login />}
                 </Route>
                 <Route path="/programs">
                     <Programs />

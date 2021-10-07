@@ -1,14 +1,9 @@
-import React from "react";
 import moment from "moment";
 import {Button} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {deleteProgramAction} from "../store/actions";
+import {deleteProgramAction, getProgramsListAction} from "../store/actions";
 
-const TablePrograms = ({total, items}) => {
-    const dispatch = useDispatch();
-    const deletePr = (id) => {
-        dispatch(deleteProgramAction(id));
-    }
+const TablePrograms = ({total, items, deleteItem}) => {
 
     return(
       <>
@@ -48,7 +43,7 @@ const TablePrograms = ({total, items}) => {
                                           }
                                       </td>
                                         <td>
-                                            <Button onClick={() => deletePr(program.id)} type="button" className="btn btn-danger">Delete</Button>
+                                            <Button onClick={() => deleteItem(program.id)} type="button" className="btn btn-danger">Delete</Button>
                                         </td>
 
                                  </tr>

@@ -1,28 +1,58 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TablePrograms from "./TablePrograms";
 import AddProgram from "./AddProgram";
-import {getProgramsListAction} from "../store/actions";
+import {addProgramAction, deleteProgramAction, getProgramsListAction} from "../store/actions";
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
     const {data} = useSelector((state) => state.domain);
 
-    useEffect(() => {
-
+    const dispatchList = () =>{
         const paginationFilter = {
             page: 1,
             perPage: 10
         }
 
         dispatch(getProgramsListAction(paginationFilter));
+    }
+
+    useEffect(() => {
+        const paginationFilter = {
+            page: 1,
+            perPage: 10
+        }
+
+        dispatch(getProgramsListAction(paginationFilter));
+
     }, [dispatch]);
+
+    const deleteItem = (id) => {
+        dispatch(deleteProgramAction(id))
+            .then(() => {
+                dispatchList();
+            });
+    }
+
+    const addProgram = (name, startsAt, endsAt) => {
+        console.log(new Date(startsAt).getUTCDate());
+        console.log(new Date(startsAt).toISOString().slice(0,19));
+        dispatch(addProgramAction(
+            name,
+            new Date(startsAt).toISOString().slice(0,19),
+            new Date(endsAt).toISOString().slice(0,19)
+        ))
+            .then(() => {
+                dispatchList();
+            });
+
+    }
 
     return (
       <>
           <h2>Programs</h2><br/>
-          <TablePrograms {...data} />
-          <AddProgram />
+          <TablePrograms {...data} deleteItem={deleteItem} />
+          <AddProgram addProgram={addProgram} />
           <br />
           <br />
           <br />
