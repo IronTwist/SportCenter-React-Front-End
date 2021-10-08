@@ -1,0 +1,11 @@
+.programBoxColor{
+    background-color: hsla(210, 83%, 51%, 0.4);;
+    margin: 10px;
+    border-radius: 0.8em;
+}
+
+.totalPrograms{
+    font-size: 1.2em;
+    margin-bottom: 50px;
+
+}

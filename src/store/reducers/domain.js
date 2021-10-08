@@ -5,7 +5,7 @@ import {
     GET_PROGRAMS_START,
     GET_PROGRAMS_SUCCESS,
     REMOVE_PROGRAM_ERROR,
-    REMOVE_PROGRAM_SUCCESS
+    REMOVE_PROGRAM_SUCCESS, UPDATE_PROGRAM_ERROR, UPDATE_PROGRAM_SUCCESS
 } from "../../modules/program/store/constants";
 
 export const initialState = {
@@ -53,6 +53,19 @@ export const domainReducer = (state = initialState,action) => {
                error: null
            }
        case ADD_PROGRAM_ERROR:
+           return {
+               loading: false,
+               data: state.data.items,
+               error: null
+           }
+
+       case UPDATE_PROGRAM_SUCCESS:
+           return {
+               loading: false,
+               data: state.data.items,
+               error: null
+           }
+       case UPDATE_PROGRAM_ERROR:
            return {
                loading: false,
                data: state.data.items,

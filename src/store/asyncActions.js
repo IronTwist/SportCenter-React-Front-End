@@ -2,7 +2,7 @@ import {
     addItemError, addItemSuccess,
     getListError, getListStart, getListSuccess,
     getLoginError, getLoginStart, getLoginSuccess,
-    removeItemError, removeItemSuccess,
+    removeItemError, removeItemSuccess, updateItemError, updateItemSuccess,
 } from "./actions";
 
 export const loginResponse = (namespace, fn) =>
@@ -58,7 +58,7 @@ export const postData = (namespace,fn) =>
             return fn(...params)
                 .then((response) => response.json())
                 .then((responseJSON) => {
-                    dispatch(addItemSuccess(namespace, responseJSON))
+                    dispatch(addItemSuccess(namespace, responseJSON));
                     return responseJSON;
                 })
                 .catch((error) => {
@@ -68,3 +68,17 @@ export const postData = (namespace,fn) =>
 
         }
 
+export const updateData = (namespace, fn) =>
+    (...params) =>
+        (dispatch) => {
+            return fn(...params)
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    dispatch(updateItemSuccess(namespace, responseJSON));
+                    return responseJSON;
+                })
+                .catch((error) => {
+                    dispatch(updateItemError(namespace, error.message));
+                    return Promise.reject(error);
+                })
+        }

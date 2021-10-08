@@ -1,6 +1,6 @@
 import {PROGRAMS} from "../data/constants";
 import {apiEndPoints} from "../../../config/config";
-import {deleteItem, getList, postData} from "../../../store/asyncActions";
+import {deleteItem, getList, postData, updateData} from "../../../store/asyncActions";
 import store from "../../../store";
 
 //************************************************ Programs
@@ -42,7 +42,7 @@ export function deleteProgramById(id){
 
 export const deleteProgramAction = deleteItem(PROGRAMS, deleteProgramById)
 
-export function addProgram(name, startsAt, endsAt, getState){
+export function addProgram(name, startsAt, endsAt){
     const {login} = store.getState();
     const token = 'Bearer '+ login.data.token;
 
@@ -67,3 +67,25 @@ export function addProgram(name, startsAt, endsAt, getState){
 }
 
 export const addProgramAction = postData(PROGRAMS, addProgram);
+
+export function updateProgram(id,name, startsAt,endsAt){
+    const url = apiEndPoints.deleteProgram + `${id}`;
+    const {login} = store.getState();
+    const token = 'Bearer '+ login.data.token;
+
+    const headRequest = {
+        method: "PUT",
+        headers: {
+            'Authorization': token,
+        },
+        body: new URLSearchParams({
+            'name': name,
+            'startsAt': startsAt,
+            'endsAt': endsAt
+        })
+    }
+
+    return fetch(url,headRequest);
+}
+
+export const updateProgramAction = updateData(PROGRAMS, updateProgram);

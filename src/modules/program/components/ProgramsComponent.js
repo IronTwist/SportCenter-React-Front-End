@@ -2,7 +2,12 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TablePrograms from "./TablePrograms";
 import AddProgram from "./AddProgram";
-import {addProgramAction, deleteProgramAction, getProgramsListAction} from "../store/actions";
+import {
+    addProgramAction,
+    deleteProgramAction,
+    getProgramsListAction,
+    updateProgramAction
+} from "../store/actions";
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
@@ -48,10 +53,21 @@ const ProgramsComponent = () => {
 
     }
 
+    const updateProgram = (id, name, startsAt, endsAt) => {
+        dispatch(updateProgramAction(
+            id,
+            name,
+            new Date(startsAt).toISOString().slice(0,19),
+            new Date(endsAt).toISOString().slice(0,19)
+            ))
+            .then(() => dispatchList());
+    }
+
     return (
       <>
-          <h2>Programs</h2><br/>
-          <TablePrograms {...data} deleteItem={deleteItem} />
+          <br />
+          <h2>Health Center Programs</h2><br/>
+          <TablePrograms {...data} deleteItem={deleteItem} updateProgram={updateProgram} /><br />
           <AddProgram addProgram={addProgram} />
           <br />
           <br />

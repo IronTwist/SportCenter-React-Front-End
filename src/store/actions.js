@@ -47,6 +47,15 @@ export const addItemError = (namespace, error) => ({
     payload: error
 });
 
+export const updateItemSuccess = (namespace) => ({
+   type: `UPDATE_${namespace}_SUCCESS`,
+});
+
+export const updateItemError = (namespace, error) => ({
+   type: `UPDATE_${namespace}_ERROR`,
+   payload: error
+});
+
 
 
 
