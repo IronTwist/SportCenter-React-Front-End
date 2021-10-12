@@ -92,7 +92,6 @@ export const updateProgramAction = updateData(PROGRAMS, updateProgram);
 
 export function getProgram(id){
     const url = apiEndPoints.getProgram +`${id}`;
-    console.log(url);
     const headRequest = {
         method: "GET",
         headers: {

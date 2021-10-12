@@ -20,9 +20,15 @@ const Navbar = () => {
                     </li>
 
                     {user ?
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/programs">Programs</Link>
-                    </li> : null
+                        <>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/programs">Programs</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/users">Users</Link>
+                            </li>
+                        </>
+                     : null
                     }
                     <li className="nav-item">
                         <Link className="nav-link" to="/about">About</Link>

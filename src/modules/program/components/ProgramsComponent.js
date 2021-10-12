@@ -11,7 +11,7 @@ import {
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
-    const {list} = useSelector((state) => state.domain.data);
+    const {list} = useSelector((state) => state.domain.programs.data);
 
     const dispatchList = () =>{
         const paginationFilter = {

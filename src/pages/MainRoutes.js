@@ -8,6 +8,7 @@ import Login from "../modules/login/pages/Login";
 import Programs from "../modules/program/pages/Programs";
 import {useSelector} from "react-redux";
 import Program from "../modules/program/pages/Program";
+import UsersPage from "../modules/user/pages/UsersPage";
 
 const ReactRouterSetup = () => {
     const {user} = useSelector((store) => store.login.data);
@@ -33,6 +34,10 @@ const ReactRouterSetup = () => {
                     </Route>
 
                     <Route path="/program/:id">
+                        <Redirect to="/login"/>
+                    </Route>
+
+                    <Route path="/users">
                         <Redirect to="/login"/>
                     </Route>
 
@@ -64,11 +69,15 @@ const ReactRouterSetup = () => {
                 </Route>
 
                 <Route path="/programs">
-                    <Programs/>
+                    <Programs />
                 </Route>
 
                 <Route path="/program/:id">
                     <Program />
+                </Route>
+
+                <Route path="/users">
+                    <UsersPage />
                 </Route>
 
                 <Route path="/about">

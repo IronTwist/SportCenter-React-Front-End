@@ -2,16 +2,14 @@ import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {getProgramAction} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
-import {Button} from "react-bootstrap";
 
 const Program = () => {
     const { id } = useParams()
     const dispatch = useDispatch();
-    const programIdInStore = useSelector((store) => store.domain.data.items[id]);
+    const programIdInStore = useSelector((store) => store.domain.programs.data.items[id]);
     const program = useSelector(
-        (store) => store.domain.data.items[id]
+        (store) => store.domain.programs.data.items[id]
     );
-    console.log(programIdInStore);
 
     useEffect(() => {
         if(typeof  programIdInStore === "undefined" || typeof program === "undefined") {
