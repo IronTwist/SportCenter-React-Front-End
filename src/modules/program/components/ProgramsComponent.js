@@ -11,7 +11,7 @@ import {
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
-    const {data} = useSelector((state) => state.domain);
+    const {list} = useSelector((state) => state.domain.data);
 
     const dispatchList = () =>{
         const paginationFilter = {
@@ -67,7 +67,7 @@ const ProgramsComponent = () => {
       <>
           <br />
           <h2>Health Center Programs</h2><br/>
-          <TablePrograms {...data} deleteItem={deleteItem} updateProgram={updateProgram} /><br />
+          <TablePrograms {...list} deleteItem={deleteItem} updateProgram={updateProgram} /><br />
           <AddProgram addProgram={addProgram} />
           <br />
           <br />

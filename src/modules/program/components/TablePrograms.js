@@ -2,6 +2,8 @@ import moment from "moment";
 import {Button} from "react-bootstrap";
 import '../../../css/TablePrograms.css';
 import UpdateProgram from "./UpdateProgram";
+import Program from "../pages/Program";
+import {Link} from "react-router-dom";
 
 const TablePrograms = ({total, items, deleteItem, updateProgram}) => {
     return (
@@ -21,7 +23,10 @@ const TablePrograms = ({total, items, deleteItem, updateProgram}) => {
                     return  <div className="col" key={program.id}>
                                 <div className="card h-80 shadow p-3 mb-5 bg-body rounded programBoxColor">
                                     <div className="card-body shadow-sm p-3 mb-5 bg-body rounded">
-                                        <h5 className="card-title"><span className="float-sm-start">#{program.id}</span>  {program.name}</h5>
+                                        <h5 className="card-title">
+                                            <span className="float-sm-start">#{program.id}</span>
+                                            <Link to={`/program/${program.id}`}>{program.name}</Link>
+                                        </h5>
                                         <br />
                                         <p className="card-text ">
                                             <span>
@@ -31,10 +36,10 @@ const TablePrograms = ({total, items, deleteItem, updateProgram}) => {
                                                 <span style={{fontWeight: "bold"}}>End date:</span> {endsAt}
                                             </span><br />
                                             <span>
-                                                <span style={{fontWeight: "bold"}}>Program status:</span>
+                                                <span style={{fontWeight: "bold"}}>Status:</span>
                                                 {
                                                       program.canceledAt !== null?
-                                                          canceledAt : ' Program Activ'
+                                                         ' Inactive ' + canceledAt : ' Active'
                                                   }
                                             </span>
                                         </p>

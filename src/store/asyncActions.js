@@ -1,5 +1,5 @@
 import {
-    addItemError, addItemSuccess,
+    addItemError, addItemSuccess, getItemError, getItemSuccess,
     getListError, getListStart, getListSuccess,
     getLoginError, getLoginStart, getLoginSuccess,
     removeItemError, removeItemSuccess, updateItemError, updateItemSuccess,
@@ -79,6 +79,21 @@ export const updateData = (namespace, fn) =>
                 })
                 .catch((error) => {
                     dispatch(updateItemError(namespace, error.message));
+                    return Promise.reject(error);
+                })
+        }
+
+export const getItem = (namespace, fn) =>
+    (...params) =>
+        (dispatch) => {
+            return fn(...params)
+                .then((response) => response.json())
+                .then((responseJSON) => {
+                    dispatch(getItemSuccess(namespace,responseJSON));
+                    return responseJSON;
+                })
+                .catch((error) => {
+                    dispatch(getItemError(namespace, error.message));
                     return Promise.reject(error);
                 })
         }

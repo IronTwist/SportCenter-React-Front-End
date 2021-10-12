@@ -56,6 +56,14 @@ export const updateItemError = (namespace, error) => ({
    payload: error
 });
 
+export const getItemSuccess = (namespace, payload) =>({
+    type: `GET_${namespace}_BY_ID_SUCCESS`,
+    payload
+});
 
+export const getItemError = (namespace, error) => ({
+   type: `GET_${namespace}_BY_ID_ERROR`,
+   payload: error
+});
 
 

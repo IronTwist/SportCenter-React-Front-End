@@ -1,6 +1,6 @@
 import {PROGRAMS} from "../data/constants";
 import {apiEndPoints} from "../../../config/config";
-import {deleteItem, getList, postData, updateData} from "../../../store/asyncActions";
+import {deleteItem, getItem, getList, postData, updateData} from "../../../store/asyncActions";
 import store from "../../../store";
 
 //************************************************ Programs
@@ -68,7 +68,7 @@ export function addProgram(name, startsAt, endsAt){
 
 export const addProgramAction = postData(PROGRAMS, addProgram);
 
-export function updateProgram(id,name, startsAt,endsAt){
+export function updateProgram(id, name, startsAt, endsAt){
     const url = apiEndPoints.deleteProgram + `${id}`;
     const {login} = store.getState();
     const token = 'Bearer '+ login.data.token;
@@ -89,3 +89,18 @@ export function updateProgram(id,name, startsAt,endsAt){
 }
 
 export const updateProgramAction = updateData(PROGRAMS, updateProgram);
+
+export function getProgram(id){
+    const url = apiEndPoints.getProgram +`${id}`;
+    console.log(url);
+    const headRequest = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    return fetch(url, headRequest);
+}
+
+export const getProgramAction = getItem(PROGRAMS, getProgram);
