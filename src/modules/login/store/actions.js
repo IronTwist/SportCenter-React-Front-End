@@ -21,4 +21,3 @@ export function getLoginData(email, password){
 }
 
 export const getLoginResponseAction = loginResponse(LOGIN, getLoginData);
-

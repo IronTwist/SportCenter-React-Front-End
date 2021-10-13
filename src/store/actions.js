@@ -65,5 +65,3 @@ export const getItemError = (namespace, error) => ({
    type: `GET_${namespace}_BY_ID_ERROR`,
    payload: error
 });
-
-

@@ -41,7 +41,9 @@ export const deleteItem = (namespace, fn) =>
     (...params) =>
         (dispatch) => {
             return fn(...params)
-                .then((response) => response.json())
+                .then((response) => {
+                    return response.json()
+                })
                 .then((responseJSON) => {
                     dispatch(removeItemSuccess(namespace, responseJSON));
                     return responseJSON;

@@ -90,7 +90,7 @@ export const domainReducer = (state = initialState,action) => {
                                 ...state.programs.data.items,
                             }
                         },
-                        error: action.payload.error
+                        error: action.payload
                    },
                error: null
            };
@@ -141,7 +141,7 @@ export const domainReducer = (state = initialState,action) => {
                        list: state.programs.data.items,
                        items: state.programs.data.items
                    },
-                   error: action.payload.error
+                   error: action.payload
                },
                users: {
                    loading:false,
@@ -179,7 +179,7 @@ export const domainReducer = (state = initialState,action) => {
                        list: state.programs.data.items,
                        items: state.programs.data.items
                    },
-                   error: action.payload.error
+                   error: action.payload
                },
                users: {
                    loading:false,
@@ -217,7 +217,7 @@ export const domainReducer = (state = initialState,action) => {
                        list: state.programs.data.items,
                        items: state.programs.data.items
                    },
-                   error: action.payload.error
+                   error: action.payload
                },
                users: {
                    loading:false,
@@ -282,7 +282,7 @@ export const domainReducer = (state = initialState,action) => {
                        list: {},
                        items: state.users.data.items
                    },
-                   error: action.payload.error
+                   error: action.payload
                }
            };
        case REMOVE_USERS_SUCCESS:
@@ -320,7 +320,7 @@ export const domainReducer = (state = initialState,action) => {
                        list: state.users.data.list,
                        items: state.users.data.items
                    },
-                   error: action.payload.error
+                   error: action.payload
                }
            };
        default:
