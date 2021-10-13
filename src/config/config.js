@@ -7,5 +7,6 @@ export const apiEndPoints = {
     addProgram: 'http://127.0.0.1:8000/api/programs',
     updateProgram:'http://127.0.0.1:8000/api/programs',
 
-    getUsers: 'http://127.0.0.1:8000/api/users'
+    getUsers: 'http://127.0.0.1:8000/api/users',
+    deleteUsers: 'http://127.0.0.1:8000/api/users'
 }

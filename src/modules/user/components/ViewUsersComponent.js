@@ -4,7 +4,7 @@ import {Dropdown} from "react-bootstrap";
 import {BiEdit,FcContacts, FiTrash} from "react-icons/all";
 
 
-const ViewUsersComponent = ({total, items }) => {
+const ViewUsersComponent = ({total, items, deleteUserByAdmin}) => {
 
     return (
       <>
@@ -29,7 +29,7 @@ const ViewUsersComponent = ({total, items }) => {
                               items.map((user) => {
                                   return (
                                     <>
-                                        <tr>
+                                        <tr key={user.id}>
                                             <td>
                                                 { user.name }
                                             </td>
@@ -53,8 +53,8 @@ const ViewUsersComponent = ({total, items }) => {
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu>
-                                                        <Dropdown.Item href="#/action-1"><BiEdit /> Edit profile</Dropdown.Item>
-                                                        <Dropdown.Item href="#/action-2"> <FiTrash />  Remove</Dropdown.Item>
+                                                        <Dropdown.Item href={`/user/${user.id}`}><BiEdit /> Edit profile</Dropdown.Item>
+                                                        <Dropdown.Item onClick={() => deleteUserByAdmin(user.id)}> <FiTrash />  Remove</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                             </td>
