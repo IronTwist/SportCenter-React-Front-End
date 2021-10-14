@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TablePrograms from "./TablePrograms";
 import AddProgram from "./AddProgram";
@@ -9,15 +9,30 @@ import {
     updateProgramAction
 } from "../store/actions";
 import moment from "moment";
+import PaginationNav from "./PaginationNav";
+import PaginationNavTop from "./PaginationNavTop";
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
-    const {list} = useSelector((state) => state.domain.programs.data);
+    const { list } = useSelector((state) => state.domain.programs.data);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPerPage, setCurrentPerPage] = useState(5);
+
+    const currentPaginationNavData = {
+        curPage: currentPage,
+        curPerPage: currentPerPage,
+        totalElements: list.total
+    }
+
+    const paginationChangeNav = (newPage, newPerPage) => {
+        setCurrentPage(newPage);
+        setCurrentPerPage(newPerPage);
+    }
 
     const dispatchList = () =>{
         const paginationFilter = {
-            page: 1,
-            perPage: 10
+            page: currentPage,
+            perPage: currentPerPage
         }
 
         dispatch(getProgramsListAction(paginationFilter));
@@ -25,13 +40,12 @@ const ProgramsComponent = () => {
 
     useEffect(() => {
         const paginationFilter = {
-            page: 1,
-            perPage: 10
+            page: currentPage,
+            perPage: currentPerPage
         }
 
         dispatch(getProgramsListAction(paginationFilter));
-
-    }, [dispatch]);
+    }, [dispatch, currentPage, currentPerPage]);
 
     const deleteItem = (id) => {
         dispatch(deleteProgramAction(id))
@@ -68,7 +82,15 @@ const ProgramsComponent = () => {
       <>
           <br />
           <h2>Health Center Programs</h2><br/>
+          <PaginationNavTop
+              currentPaginationNavData={currentPaginationNavData}
+              paginationChangeNav={paginationChangeNav}
+          />
           <TablePrograms {...list} deleteItem={deleteItem} updateProgram={updateProgram} /><br />
+          <PaginationNav
+              currentPaginationNavData={currentPaginationNavData}
+              paginationChangeNav={paginationChangeNav}
+          />
           <AddProgram addProgram={addProgram} />
           <br />
           <br />

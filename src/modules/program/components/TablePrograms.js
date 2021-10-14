@@ -7,8 +7,6 @@ import {Link} from "react-router-dom";
 const TablePrograms = ({total, items, deleteItem, updateProgram}) => {
     return (
     <>
-        <div className="totalPrograms">Total programs: {total}</div>
-
         <div className="programBoxColor">
         <div className="row row-cols-1 row-cols-md-3 g-4 ">
             {
