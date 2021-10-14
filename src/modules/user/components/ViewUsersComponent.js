@@ -28,7 +28,6 @@ const ViewUsersComponent = ({total, items, deleteUserByAdmin}) => {
                               typeof items !== 'undefined'?
                               items.map((user) => {
                                   return (
-                                    <>
                                         <tr key={user.id}>
                                             <td>
                                                 { user.name }
@@ -59,7 +58,6 @@ const ViewUsersComponent = ({total, items, deleteUserByAdmin}) => {
                                                 </Dropdown>
                                             </td>
                                         </tr>
-                                    </>
                                   );
                               }) : null
                           }

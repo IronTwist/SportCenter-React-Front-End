@@ -8,6 +8,7 @@ import {
     getProgramsListAction,
     updateProgramAction
 } from "../store/actions";
+import moment from "moment";
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
@@ -40,17 +41,17 @@ const ProgramsComponent = () => {
     }
 
     const addProgram = (name, startsAt, endsAt) => {
-        console.log(new Date(startsAt).getUTCDate());
-        console.log(new Date(startsAt).toISOString().slice(0,19));
+        const startDate = moment(startsAt).format("YYYY-MM-DDTHH:mm:ss");
+        const endDate = moment(endsAt).format("YYYY-MM-DDTHH:mm:ss");
+
         dispatch(addProgramAction(
             name,
-            new Date(startsAt).toISOString().slice(0,19),
-            new Date(endsAt).toISOString().slice(0,19)
+            startDate,
+            endDate
         ))
             .then(() => {
                 dispatchList();
             });
-
     }
 
     const updateProgram = (id, name, startsAt, endsAt) => {
