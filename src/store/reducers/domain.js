@@ -36,45 +36,32 @@ export const initialState = {
 export const domainReducer = (state = initialState,action) => {
    switch(action.type){
        case GET_PROGRAMS_START:
-           return  {
+           return {
+               ...state,
                programs: {
+                   ...state.programs,
                    loading: true,
                    data: {
-                       list: {},
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
+                       ...state.programs.data,
+                       list: {}
+                   }
                }
-           };
+           }
        case GET_PROGRAMS_SUCCESS:
            return {
-           programs: {
-               loading: false,
-               data: {
-                   list: action.payload,
-                   items: state.programs.data.items
-               },
-               error: null
-           },
-           users: {
-               loading:false,
-               data: {
-                   list: state.users.data.list,
-                   items: state.users.data.items
-               },
-               error: null
+               ...state,
+               programs: {
+                   ...state.programs,
+                   loading: false,
+                   data: {
+                       ...state.programs.data,
+                       list: action.payload
+                   }
+               }
            }
-       };
        case GET_PROGRAMS_BY_ID_SUCCESS:
            const newState = Object.assign({}, state);
+
            newState.programs.data.items[action.payload.id] = action.payload;
 
            return newState;
@@ -84,12 +71,6 @@ export const domainReducer = (state = initialState,action) => {
                ...state,
                programs: {
                         ...state.programs,
-                        data: {
-                            ...state.programs.data,
-                            items: {
-                                ...state.programs.data.items,
-                            }
-                        },
                         error: action.payload
                    },
                error: null
@@ -97,232 +78,102 @@ export const domainReducer = (state = initialState,action) => {
 
        case GET_PROGRAMS_ERROR:
            return {
+               ...state,
                programs: {
+                   ...state.programs,
                    loading: false,
                    data: {
-                       list: {},
-                       items: state.programs.data.items
+                       ...state.programs.data,
+                       list: {}
                    },
                    error: action.payload
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
                }
-           };
+           }
        case REMOVE_PROGRAM_SUCCESS:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
-               }
-           };
+               ...state
+           }
        case REMOVE_PROGRAM_ERROR:
            return {
+               ...state,
                programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
+                   ...state.programs,
                    error: action.payload
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
                }
-           };
+           }
        case ADD_PROGRAM_SUCCESS:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
-               }
+               ...state
            };
        case ADD_PROGRAM_ERROR:
            return {
+               ...state,
                programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
+                   ...state.programs,
                    error: action.payload
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
                }
-           };
+           }
        case UPDATE_PROGRAM_SUCCESS:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
-               }
+               ...state
            };
        case UPDATE_PROGRAM_ERROR:
            return {
+               ...state,
                programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
+                   ...state.programs,
                    error: action.payload
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
                }
-           };
+           }
        case GET_USERS_START:
-           return  {
-               programs: {
-                   loading: state.programs.loading,
-                   data: {
-                       list: state.programs.data.list,
-                       items: state.programs.data.items
-                   },
-                   error: state.programs.error
-               },
+           return {
+               ...state,
                users: {
+                   ...state.users,
                    loading: true,
                    data: {
-                       list: {},
-                       items: state.users.data.items
-                   },
-                   error: null
+                       ...state.users.data,
+                       list: {}
+                   }
                }
-           };
+           }
        case GET_USERS_SUCCESS:
            return {
-               programs: {
+               ...state,
+               users: {
+                   ...state.users,
                    loading: false,
                    data: {
-                       list: state.programs.data.list,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: action.payload,
-                       items: state.users.data.items
-                   },
-                   error: null
+                       ...state.users.data,
+                       list: action.payload
+                   }
                }
-           };
+           }
        case GET_USERS_ERROR:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.list,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
+               ...state,
                users: {
+                   ...state.users,
                    loading: false,
                    data: {
-                       list: {},
-                       items: state.users.data.items
+                       ...state.users.data,
+                       list: {}
                    },
                    error: action.payload
                }
-           };
+           }
        case REMOVE_USERS_SUCCESS:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
-               users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
-                   error: null
-               }
+               ...state
            };
        case REMOVE_USERS_ERROR:
            return {
-               programs: {
-                   loading: false,
-                   data: {
-                       list: state.programs.data.items,
-                       items: state.programs.data.items
-                   },
-                   error: null
-               },
+               ...state,
                users: {
-                   loading:false,
-                   data: {
-                       list: state.users.data.list,
-                       items: state.users.data.items
-                   },
+                   ...state.users,
                    error: action.payload
                }
-           };
+           }
        default:
            return state;
    }

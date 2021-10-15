@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteUserByAdminAction, getUsersListAction} from "../store/actions";
 import ViewUsersComponent from "./ViewUsersComponent";
 import useUser from "../hooks/useUser";
+import PaginationWrapper from "../../pagination/PaginationWrapper";
 
 const UsersComponent = () => {
     const dispatch = useDispatch();
@@ -11,10 +12,24 @@ const UsersComponent = () => {
     const [loggedUserIsAdmin, setLoggedUserIsAdmin] = useState(null);
     const isAdmin = useUser().isAdmin;
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPerPage, setCurrentPerPage] = useState(3);
+
+    const currentPaginationNavData = {
+        curPage: currentPage,
+        curPerPage: currentPerPage,
+        totalElements: list.total
+    }
+
+    const paginationChangeNav = (newPage, newPerPage) => {
+        setCurrentPage(newPage);
+        setCurrentPerPage(newPerPage);
+    }
+
     const getUserList = () => {
         const paginationFilter = {
-            page: 1,
-            perPage: 10
+            page: currentPage,
+            perPage: currentPerPage
         }
 
         dispatch(getUsersListAction(paginationFilter));
@@ -22,13 +37,13 @@ const UsersComponent = () => {
 
     useEffect(() => {
        const paginationFilter ={
-           page: 1,
-           perPage: 10
+           page: currentPage,
+           perPage: currentPerPage
        };
 
        dispatch(getUsersListAction(paginationFilter));
         setLoggedUserIsAdmin(isAdmin);
-    }, [dispatch, isAdmin]);
+    }, [dispatch, isAdmin,currentPage, currentPerPage]);
 
     const deleteUserByAdmin = (id) => {
 
@@ -43,9 +58,13 @@ const UsersComponent = () => {
 
     return (
         <>
-            <h4>All users</h4>
             { displayError ? <div className="container-fluid alert alert-danger">You must be admin to delete users</div> : null }
-            <ViewUsersComponent {...list} deleteUserByAdmin={deleteUserByAdmin} />
+            <PaginationWrapper
+                currentPaginationNavData={currentPaginationNavData}
+                paginationChangeNav={paginationChangeNav}
+            >
+                <ViewUsersComponent {...list} deleteUserByAdmin={deleteUserByAdmin} />
+            </PaginationWrapper>
         </>
     );
 }

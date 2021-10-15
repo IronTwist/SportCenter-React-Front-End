@@ -9,8 +9,7 @@ import {
     updateProgramAction
 } from "../store/actions";
 import moment from "moment";
-import PaginationNav from "./PaginationNav";
-import PaginationNavTop from "./PaginationNavTop";
+import PaginationWrapper from "../../pagination/PaginationWrapper";
 
 const ProgramsComponent = () => {
     const dispatch = useDispatch();
@@ -82,15 +81,14 @@ const ProgramsComponent = () => {
       <>
           <br />
           <h2>Health Center Programs</h2><br/>
-          <PaginationNavTop
+
+          <PaginationWrapper
               currentPaginationNavData={currentPaginationNavData}
               paginationChangeNav={paginationChangeNav}
-          />
-          <TablePrograms {...list} deleteItem={deleteItem} updateProgram={updateProgram} /><br />
-          <PaginationNav
-              currentPaginationNavData={currentPaginationNavData}
-              paginationChangeNav={paginationChangeNav}
-          />
+          >
+              <TablePrograms {...list} deleteItem={deleteItem} updateProgram={updateProgram} />
+          </PaginationWrapper>
+
           <AddProgram addProgram={addProgram} />
           <br />
           <br />

@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 const Logout = () => {
+
+    useEffect(() => {
+       setTimeout(() => window.location.reload(true), 1000);
+    });
+
     return (
-        <h2>Successfully log out</h2>
+        <>
+            <h3>Logout successful</h3>
+        </>
     );
 }
 
