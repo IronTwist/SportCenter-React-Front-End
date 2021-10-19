@@ -1,63 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PaginationNav = ({ currentPaginationNavData, paginationChangeNav }) => {
-  const { curPage: currentPage, curPerPage: currentPerPage } = currentPaginationNavData;
-  const { totalElements } = currentPaginationNavData;
-  const totalPages = Math.ceil(totalElements / currentPerPage);
+const PaginationNav = ({ curPage, curPerPage, totalElements, paginationChangeNav }) => {
+  const totalPages = Math.ceil(totalElements / curPerPage);
 
   return (
     <nav aria-label="...">
       <ul className="pagination justify-content-center">
-        {currentPage > 1 ? (
+        {curPage > 1 ? (
           <li className="page-item">
             <button
               type="button"
               className="page-link"
-              onClick={() => paginationChangeNav(currentPage > 1 ? currentPage - 1 : 1, currentPerPage)}
+              onClick={() => paginationChangeNav(curPage > 1 ? curPage - 1 : 1, curPerPage)}
             >Previous
             </button>
           </li>
         )
           : null}
-        {currentPage > 1
+        {curPage > 1
           ? (
             <li className="page-item">
               <button
                 type="button"
                 className="page-link"
-                onClick={() => paginationChangeNav(currentPage > 1 ? currentPage - 1 : 1, currentPerPage)}
-              >{(currentPage - 1)}
+                onClick={() => paginationChangeNav(curPage > 1 ? curPage - 1 : 1, curPerPage)}
+              >{(curPage - 1)}
               </button>
             </li>
           )
           : null}
         <li className="page-item active">
-          <button type="button" className="page-link">{currentPage}</button>
+          <button type="button" className="page-link">{curPage}</button>
         </li>
-        {currentPage < totalPages
+        {curPage < totalPages
           ? (
             <li className="page-item">
               <button
                 type="button"
                 className="page-link"
-                onClick={() => paginationChangeNav(currentPage < totalPages
-                  ? currentPage + 1
-                  : currentPage, currentPerPage)}
-              >{(currentPage + 1)}
+                onClick={() => paginationChangeNav(curPage < totalPages
+                  ? curPage + 1
+                  : curPage, curPerPage)}
+              >{(curPage + 1)}
               </button>
             </li>
           )
           : null}
-        { currentPage < totalPages
+        { curPage < totalPages
           ? (
             <li className="page-item">
               <button
                 type="button"
                 className="page-link"
-                onClick={() => paginationChangeNav(currentPage < totalPages
-                  ? currentPage + 1
-                  : currentPage, currentPerPage)}
+                onClick={() => paginationChangeNav(curPage < totalPages
+                  ? curPage + 1
+                  : curPage, curPerPage)}
               >Next
               </button>
             </li>
@@ -69,20 +67,14 @@ const PaginationNav = ({ currentPaginationNavData, paginationChangeNav }) => {
 };
 
 PaginationNav.propTypes = {
-  currentPaginationNavData: PropTypes.shape({
-    curPage: PropTypes.number,
-    curPerPage: PropTypes.number,
-    totalElements: PropTypes.number,
-  }),
+  curPage: PropTypes.number.isRequired,
+  curPerPage: PropTypes.number.isRequired,
+  totalElements: PropTypes.number,
   paginationChangeNav: PropTypes.func.isRequired,
 };
 
 PaginationNav.defaultProps = {
-  currentPaginationNavData: PropTypes.shape({
-    curPage: PropTypes.number,
-    curPerPage: PropTypes.number,
-    totalElements: PropTypes.number,
-  }),
+  totalElements: 0,
 };
 
 export default PaginationNav;

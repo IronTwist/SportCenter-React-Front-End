@@ -1,4 +1,4 @@
-import { apiEndPoints } from '../../../config/config';
+import { apiEndPoints } from '../../../config/apiEndPoints';
 import { LOGIN } from '../data/constants';
 import { loginResponse } from '../../../store/asyncActions';
 

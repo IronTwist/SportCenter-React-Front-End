@@ -1,4 +1,4 @@
-import { apiEndPoints } from '../../../config/config';
+import { apiEndPoints } from '../../../config/apiEndPoints';
 import { USERS } from '../data/constants';
 import { deleteItem, getList } from '../../../store/asyncActions';
 import myStore from '../../../store';

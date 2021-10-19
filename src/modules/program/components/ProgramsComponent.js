@@ -84,7 +84,9 @@ const ProgramsComponent = () => {
       <h2>Health Center Programs</h2><br/>
 
       <PaginationWrapper
-        currentPaginationNavData={currentPaginationNavData}
+        curPage={currentPaginationNavData.curPage}
+        curPerPage={currentPaginationNavData.curPerPage}
+        totalElements={currentPaginationNavData.totalElements}
         paginationChangeNav={paginationChangeNav}
       >
         <TablePrograms {...list} deleteItem={deleteItem} updateProgram={updateProgram} />

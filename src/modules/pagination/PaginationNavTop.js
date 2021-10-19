@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PaginationNavTop = ({ currentPaginationNavData, paginationChangeNav }) => {
-  const currentPage = currentPaginationNavData.curPage;
-  const currentPerPage = currentPaginationNavData.curPerPage;
-  const { totalElements } = currentPaginationNavData;
-  const totalPages = Math.ceil(totalElements / currentPerPage);
+const PaginationNavTop = ({ curPage, curPerPage, totalElements, paginationChangeNav }) => {
+  const totalPages = Math.ceil(totalElements / curPerPage);
 
   const changePage = (newPage) => {
-    paginationChangeNav(Number(newPage), currentPerPage);
+    paginationChangeNav(Number(newPage), curPerPage);
   };
 
   const changePerPage = (newPerPage) => {
-    paginationChangeNav(currentPage, Number(newPerPage));
+    paginationChangeNav(curPage, Number(newPerPage));
   };
 
   return (
@@ -26,7 +23,7 @@ const PaginationNavTop = ({ currentPaginationNavData, paginationChangeNav }) => 
                 type="number"
                 id="pageId"
                 min="1"
-                defaultValue={currentPerPage}
+                defaultValue={curPerPage}
                 onChange={(e) => changePerPage(e.target.value)}
               />
               <div className="input-group-prepend">
@@ -43,7 +40,7 @@ const PaginationNavTop = ({ currentPaginationNavData, paginationChangeNav }) => 
                 id="pageId"
                 min="1"
                 max={totalPages.toString()}
-                value={currentPage.toString()}
+                value={curPage.toString()}
                 onChange={(e) => changePage(e.target.value)}
               />
               <div className="input-group-prepend">
@@ -58,20 +55,14 @@ const PaginationNavTop = ({ currentPaginationNavData, paginationChangeNav }) => 
 };
 
 PaginationNavTop.propTypes = {
-  currentPaginationNavData: PropTypes.shape({
-    curPage: PropTypes.number,
-    curPerPage: PropTypes.number,
-    totalElements: PropTypes.number,
-  }),
+  curPage: PropTypes.number.isRequired,
+  curPerPage: PropTypes.number.isRequired,
+  totalElements: PropTypes.number,
   paginationChangeNav: PropTypes.func.isRequired,
 };
 
 PaginationNavTop.defaultProps = {
-  currentPaginationNavData: PropTypes.shape({
-    curPage: PropTypes.number,
-    curPerPage: PropTypes.number,
-    totalElements: PropTypes.number,
-  }),
+  totalElements: 0,
 };
 
 export default PaginationNavTop;

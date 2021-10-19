@@ -1,5 +1,5 @@
 import { PROGRAMS } from '../data/constants';
-import { apiEndPoints } from '../../../config/config';
+import { apiEndPoints } from '../../../config/apiEndPoints';
 import { deleteItem, getItem, getList, postData, updateData } from '../../../store/asyncActions';
 import myStore from '../../../store';
 

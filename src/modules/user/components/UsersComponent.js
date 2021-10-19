@@ -65,6 +65,9 @@ const UsersComponent = () => {
       ) : null }
       <PaginationWrapper
         currentPaginationNavData={currentPaginationNavData}
+        curPage={currentPaginationNavData.curPage}
+        curPerPage={currentPaginationNavData.curPerPage}
+        totalElements={currentPaginationNavData.totalElements}
         paginationChangeNav={paginationChangeNav}
       >
         <ViewUsersComponent {...list} deleteUserByAdmin={deleteUserByAdmin} />
