@@ -1,5 +1,7 @@
+import React from 'react';
+
 import './css/App.css';
-import ReactRouterSetup from "./pages/MainRoutes";
+import ReactRouterSetup from './pages/MainRoutes';
 
 function App() {
   return (

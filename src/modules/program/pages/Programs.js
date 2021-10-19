@@ -1,10 +1,9 @@
-import React from "react";
-import ProgramsComponent from "../components/ProgramsComponent";
+import React from 'react';
 
-const Programs = () => {
-    return (
-        <ProgramsComponent />
-    );
-}
+import ProgramsComponent from '../components/ProgramsComponent';
+
+const Programs = () => (
+  <ProgramsComponent />
+);
 
 export default Programs;

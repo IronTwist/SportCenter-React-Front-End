@@ -1,9 +1,9 @@
-import { LoginForm } from '../forms/LoginForm'
+import React from 'react';
 
-export const LoginComponent = () => {
-    return (
-        <>
-            <LoginForm />
-        </>
-    );
-}
+import { LoginForm } from '../forms/LoginForm';
+
+export const LoginComponent = () => (
+  <>
+    <LoginForm />
+  </>
+);

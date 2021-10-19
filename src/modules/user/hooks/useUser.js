@@ -1,12 +1,12 @@
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
 
 const useUser = () => {
-    const { user } = useSelector((store) => store.login.data);
+  const { user } = useSelector((store) => store.login.data);
 
-    return {
-        user: user,
-        isAdmin: !!user.roles.find(e => e === "ROLE_ADMIN")
-    }
-}
+  return {
+    user,
+    isAdmin: !!user.roles.find((e) => e === 'ROLE_ADMIN'),
+  };
+};
 
 export default useUser;

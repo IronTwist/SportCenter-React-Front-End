@@ -1,15 +1,19 @@
-import PaginationNav from "./PaginationNav";
-import React from "react";
-import PaginationNavTop from "./PaginationNavTop";
+import React from 'react';
 
-const PaginationWrapper = ({children, ...remainingProps}) => {
-    return (
-        <>
-            <PaginationNavTop {...remainingProps} />
-            {children}
-            <PaginationNav {...remainingProps} />
-        </>
-    );
-}
+import PropTypes from 'prop-types';
+import PaginationNav from './PaginationNav';
+import PaginationNavTop from './PaginationNavTop';
+
+const PaginationWrapper = ({ children, ...remainingProps }) => (
+  <>
+    <PaginationNavTop {...remainingProps} />
+    { children }
+    <PaginationNav {...remainingProps} />
+  </>
+);
+
+PaginationWrapper.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default PaginationWrapper;

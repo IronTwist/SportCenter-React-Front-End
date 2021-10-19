@@ -1,0 +1,57 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "no-empty-pattern": 2,
+        "no-multiple-empty-lines": ["error", { "max":  2 }],
+        "arrow-parens": [2, "always"],
+        "linebreak-style": "off",
+        "object-curly-newline": "off",
+        "no-plusplus":"off",
+        "no-shadow": "off",
+        "no-underscore-dangle": "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "react/destructuring-assignment": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-tag-spacing": "off",
+        "react/no-array-index-key": "off",
+        "quotes": [1, "single"],
+        "max-len": [2, 120, 2, {
+            "ignoreUrls": true,
+            "ignoreComments": false
+        }],
+        "consistent-return": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/interactive-supports-focus": "off",
+        "jsx-a11y/label-has-for": "off",
+        "jsx-a11y/label-has-associated-control": 0
+    },
+    "globals": {
+        "_LOCALE": true,
+        "_LANG": true,
+        "_BASE_PATH": true,
+        "Translator": true
+    }
+}
