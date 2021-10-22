@@ -6,7 +6,7 @@ import myStore from '../../../store';
 //* *********************************************** Programs
 
 export function getPrograms(data) {
-  const url = `${apiEndPoints.getPrograms}?page=${data.page}&perPage=${data.perPage}`;
+  const url = `${apiEndPoints.programs}?page=${data.page}&perPage=${data.perPage}`;
 
   const headRequest = {
     method: 'GET',
@@ -19,7 +19,7 @@ export function getPrograms(data) {
 export const getProgramsListAction = getList(PROGRAMS, getPrograms);
 
 export function deleteProgramById(id) {
-  const url = `${apiEndPoints.deleteProgram}${id}`;
+  const url = `${apiEndPoints.programs}${id}`;
 
   const { login } = myStore.getState();
   const token = `Bearer ${login.data.token}`;
@@ -63,13 +63,13 @@ export function addProgram(name, startsAt, endsAt) {
     }),
   };
 
-  return fetch(apiEndPoints.addProgram, headRequest);
+  return fetch(apiEndPoints.programs, headRequest);
 }
 
 export const addProgramAction = postData(PROGRAMS, addProgram);
 
 export function updateProgram(id, name, startsAt, endsAt) {
-  const url = `${apiEndPoints.deleteProgram}${id}`;
+  const url = `${apiEndPoints.programs}${id}`;
   const { login } = myStore.getState();
   const token = `Bearer ${login.data.token}`;
 
@@ -91,7 +91,7 @@ export function updateProgram(id, name, startsAt, endsAt) {
 export const updateProgramAction = updateData(PROGRAMS, updateProgram);
 
 export function getProgram(id) {
-  const url = `${apiEndPoints.getProgram}${id}`;
+  const url = `${apiEndPoints.programs}${id}`;
   const headRequest = {
     method: 'GET',
     headers: {

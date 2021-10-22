@@ -4,7 +4,7 @@ import { deleteItem, getList } from '../../../store/asyncActions';
 import myStore from '../../../store';
 
 export function getUsersList(data) {
-  const url = `${apiEndPoints.getUsers}?page=${data.page}&perPage=${data.perPage}`;
+  const url = `${apiEndPoints.users}?page=${data.page}&perPage=${data.perPage}`;
 
   const headRequest = {
     method: 'GET',
@@ -17,7 +17,7 @@ export function getUsersList(data) {
 export const getUsersListAction = getList(USERS, getUsersList);
 
 export function deleteUser(id) {
-  const url = `${apiEndPoints.deleteUsers}/${id}/admin-delete-account`;
+  const url = `${apiEndPoints.users}/${id}/admin-delete-account`;
   const { login } = myStore.getState();
   const token = `Bearer ${login.data.token}`;
 

@@ -4,7 +4,7 @@ import UsersComponent from '../components/UsersComponent';
 
 const UsersPage = () => (
   <>  <br />
-    <h2>Users page</h2>
+    <h2>Members</h2>
     <br />
     <UsersComponent />
   </>

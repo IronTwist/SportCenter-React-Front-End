@@ -12,6 +12,7 @@ import Programs from '../modules/program/pages/Programs';
 import Program from '../modules/program/pages/Program';
 import UsersPage from '../modules/user/pages/UsersPage';
 import Logout from '../modules/logout/Logout';
+import ProgramsDrawerPage from './drawer/ProgramsDrawerPage';
 
 const ReactRouterSetup = () => {
   const { user } = useSelector((store) => store.login.data);
@@ -51,6 +52,11 @@ const ReactRouterSetup = () => {
           <Route path="/about">
             <About />
           </Route>
+
+          <Route path="/table">
+            <Redirect to="/login"/>
+          </Route>
+
           <Route path="*">
             <Error />
           </Route>
@@ -94,9 +100,15 @@ const ReactRouterSetup = () => {
         <Route path="/about">
           <About />
         </Route>
+
+        <Route path="/table">
+          <ProgramsDrawerPage />
+        </Route>
+
         <Route path="*">
           <Error />
         </Route>
+
       </Switch>
     </Router>
   );

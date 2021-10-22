@@ -11,6 +11,7 @@ import {
   updateProgramAction,
 } from '../store/actions';
 import PaginationWrapper from '../../pagination/PaginationWrapper';
+import SwipeableTemporaryDrawer from '../../drawer/SwipeableTemporaryDrawer';
 
 const ProgramsComponent = () => {
   const dispatch = useDispatch();
@@ -82,7 +83,7 @@ const ProgramsComponent = () => {
     <>
       <br />
       <h2>Health Center Programs</h2><br/>
-
+      <SwipeableTemporaryDrawer />
       <PaginationWrapper
         curPage={currentPaginationNavData.curPage}
         curPerPage={currentPaginationNavData.curPerPage}
