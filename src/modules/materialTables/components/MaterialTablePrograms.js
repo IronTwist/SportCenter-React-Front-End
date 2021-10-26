@@ -1,97 +1,125 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import {
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Pagination,
+  Select,
+  Stack,
+} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { useDispatch, useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import { getProgramsListAction } from '../../program/store/actions';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'id', label: 'Id', minWidth: 60 },
+  { id: 'name', label: 'Program Name', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'startsAt',
+    label: 'Start Date',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'endsAt',
+    label: 'End Date',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    renderCell: (params) => (
+      <strong>
+        {params.value.getFullYear()}
+      </strong>
+    ),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'canceledAt',
+    label: 'Cancel Date',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toFixed(2),
   },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
 const MaterialTablePrograms = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const dispatch = useDispatch();
+  const { total, items } = useSelector((state) => state.domain.programs.data.list);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPerPage, setCurrentPerPage] = useState(5);
+  const totalPages = Math.ceil(total / currentPerPage);
+  const [loading, setLoading] = useState(false);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const dispatchList = (value = 1) => {
+    const paginationFilter = {
+      page: value,
+      perPage: currentPerPage,
+    };
+
+    setLoading(true);
+    dispatch(getProgramsListAction(paginationFilter)).then(() => setLoading(false));
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const perPageChange = (event) => {
+    setCurrentPerPage(event.target.value);
+    setCurrentPage(1);
   };
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    dispatchList(value);
+  };
+
+  useEffect(() => {
+    dispatchList();
+  }, [currentPerPage]);
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+    <>
+      <Box sx={{ minWidth: 140, maxWidth: 140 }}>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="perPageSelectLabel">Programs per page</InputLabel>
+          <Select
+            labelId="perPageSelectLabel"
+            id="perPageSelect"
+            value={currentPerPage}
+            label="Programs per page"
+            onChange={perPageChange}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {loading && <CircularProgress sx={{ margin: '30px' }} />}
+              { items && items.map((row) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
@@ -104,19 +132,16 @@ const MaterialTablePrograms = () => {
                   })}
                 </TableRow>
               ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Stack spacing={2}>
+          <Typography sx={{ alignContent: 'flex-end' }}>Page: {currentPage}</Typography>
+          <Pagination count={totalPages} page={currentPage} onChange={handleChange} />
+        </Stack>
+      </Paper>
+    </>
   );
 };
+
 export default MaterialTablePrograms;

@@ -39,6 +39,10 @@ const SwipeableTemporaryDrawer = () => {
           <SportsTennisIcon />
           <Link className="nav-link" to="/table">Programs Table</Link>
         </Button>
+        <Button size="small">
+          <SportsTennisIcon />
+          <Link className="nav-link" to="/table2">Grid Programs Table</Link>
+        </Button>
       </Box>
     </Box>
   );

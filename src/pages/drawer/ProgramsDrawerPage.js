@@ -3,8 +3,11 @@ import MaterialTablePrograms from '../../modules/materialTables/components/Mater
 
 const ProgramsDrawerPage = () => (
   <>
-    <div>table here</div>
+    <br />
+    <h2>Programs</h2>
+    <br />
     <MaterialTablePrograms />
+    <br />
   </>
 );
 

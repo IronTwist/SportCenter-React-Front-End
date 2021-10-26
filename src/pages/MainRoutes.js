@@ -13,6 +13,7 @@ import Program from '../modules/program/pages/Program';
 import UsersPage from '../modules/user/pages/UsersPage';
 import Logout from '../modules/logout/Logout';
 import ProgramsDrawerPage from './drawer/ProgramsDrawerPage';
+import GridProgramsDrawerPage from './drawer/GridProgramDrowerPage';
 
 const ReactRouterSetup = () => {
   const { user } = useSelector((store) => store.login.data);
@@ -54,6 +55,10 @@ const ReactRouterSetup = () => {
           </Route>
 
           <Route path="/table">
+            <Redirect to="/login"/>
+          </Route>
+
+          <Route path="/table2">
             <Redirect to="/login"/>
           </Route>
 
@@ -103,6 +108,10 @@ const ReactRouterSetup = () => {
 
         <Route path="/table">
           <ProgramsDrawerPage />
+        </Route>
+
+        <Route path="/table2">
+          <GridProgramsDrawerPage />
         </Route>
 
         <Route path="*">
