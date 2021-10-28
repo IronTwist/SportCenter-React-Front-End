@@ -5,12 +5,15 @@ import { Button, Modal, ModalBody, ModalFooter, ModalTitle } from 'react-bootstr
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import Loading from '../../loader/components/Loading';
 
 const AddProgram = ({ addProgram }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
   const [startsAt, setStartsAt] = useState('No date');
   const [endsAt, setEndsAt] = useState('No date');
+  const isLoading = useSelector((store) => store.domain.programs.loading);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -24,35 +27,43 @@ const AddProgram = ({ addProgram }) => {
   return (
     <>
       <button type="button" onClick={openModal} className="btn btn-success">Add Program</button>
-      <Modal show={isOpen} onHide={closeModal}>
-        <ModalHeader closeButton>
-          <ModalTitle>Add new Program</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <label htmlFor="name">Name: </label>
-          <input type="text" id="name" onChange={(e) => setName(e.target.value)} placeholder="Tennis, Dance,..." /><br/>
-          <br />
-          Start program:
-          <DateTimePickerComponent
-            placeholder="Choose date and time"
-            onChange={(e) => setStartsAt(e.target.value)}
-            format="yyy-MM-dd HH:mm"
-          />
+      <Loading show={isLoading}>
+        <Modal show={isOpen} onHide={closeModal}>
+          <ModalHeader closeButton>
+            <ModalTitle>Add new Program</ModalTitle>
+          </ModalHeader>
+          <ModalBody>
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Tennis, Dance,..."
+            />
+            <br/>
+            <br />
+            Start program:
+            <DateTimePickerComponent
+              placeholder="Choose date and time"
+              onChange={(e) => setStartsAt(e.target.value)}
+              format="yyy-MM-dd HH:mm"
+            />
 
-          End program:
-          <DateTimePickerComponent
-            placeholder="Choose date and time"
-            onChange={(e) => setEndsAt(e.target.value)}
-            format="yyy-MM-dd HH:mm"
-          />
+            End program:
+            <DateTimePickerComponent
+              placeholder="Choose date and time"
+              onChange={(e) => setEndsAt(e.target.value)}
+              format="yyy-MM-dd HH:mm"
+            />
 
-        </ModalBody>
-        <ModalFooter>
-          <Button variant="primary" onClick={handleSubmit}>
-            Add program
-          </Button>
-        </ModalFooter>
-      </Modal>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="primary" onClick={handleSubmit}>
+              Add program
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </Loading>
     </>
   );
 };

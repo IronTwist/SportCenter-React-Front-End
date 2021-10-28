@@ -1,5 +1,5 @@
 import {
-  ADD_PROGRAM_ERROR,
+  ADD_PROGRAM_ERROR, ADD_PROGRAM_START,
   ADD_PROGRAM_SUCCESS, GET_PROGRAMS_BY_ID_ERROR, GET_PROGRAMS_BY_ID_SUCCESS,
   GET_PROGRAMS_ERROR,
   GET_PROGRAMS_START,
@@ -110,15 +110,28 @@ export const domainReducer = (state = initialState, action) => {
           error: action.payload,
         },
       };
+    case ADD_PROGRAM_START:
+      return {
+        ...state,
+        programs: {
+          ...state.programs,
+          loading: true,
+        },
+      };
     case ADD_PROGRAM_SUCCESS:
       return {
         ...state,
+        programs: {
+          ...state.programs,
+          loading: false,
+        },
       };
     case ADD_PROGRAM_ERROR:
       return {
         ...state,
         programs: {
           ...state.programs,
+          loading: false,
           error: action.payload,
         },
       };

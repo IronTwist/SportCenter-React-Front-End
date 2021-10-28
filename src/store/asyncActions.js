@@ -1,23 +1,8 @@
 import {
-  addItemError, addItemSuccess, getItemError, getItemSuccess,
+  addItemError, addItemStart, addItemSuccess, getItemError, getItemSuccess,
   getListError, getListStart, getListSuccess,
-  getLoginError, getLoginStart, getLoginSuccess,
   removeItemError, removeItemSuccess, updateItemError, updateItemSuccess,
 } from './actions';
-
-export const loginResponse = (namespace, fn) => (...params) => (dispatch) => {
-  dispatch(getLoginStart(namespace));
-  return fn(...params)
-    .then((response) => response.json())
-    .then((responseJSON) => {
-      dispatch(getLoginSuccess(namespace, responseJSON));
-      return responseJSON;
-    })
-    .catch((error) => {
-      dispatch(getLoginError(error.message));
-      return Promise.reject(error);
-    });
-};
 
 export const getList = (namespace, fn) => (...params) => (dispatch) => {
   dispatch(getListStart(namespace));
@@ -44,16 +29,19 @@ export const deleteItem = (namespace, fn) => (...params) => (dispatch) => fn(...
     return Promise.reject(error);
   });
 
-export const postData = (namespace, fn) => (...params) => (dispatch) => fn(...params)
-  .then((response) => response.json())
-  .then((responseJSON) => {
-    dispatch(addItemSuccess(namespace, responseJSON));
-    return responseJSON;
-  })
-  .catch((error) => {
-    dispatch(addItemError(namespace, error.message));
-    return Promise.reject(error);
-  });
+export const postData = (namespace, fn) => (...params) => (dispatch) => {
+  dispatch(addItemStart(namespace));
+  return fn(...params)
+    .then((response) => response.json())
+    .then((responseJSON) => {
+      dispatch(addItemSuccess(namespace, responseJSON));
+      return responseJSON;
+    })
+    .catch((error) => {
+      dispatch(addItemError(namespace, error.message));
+      return Promise.reject(error);
+    });
+};
 
 export const updateData = (namespace, fn) => (...params) => (dispatch) => fn(...params)
   .then((response) => response.json())

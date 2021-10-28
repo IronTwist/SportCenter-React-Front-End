@@ -1,6 +1,7 @@
 import { apiEndPoints } from '../../../config/apiEndPoints';
 import { LOGIN } from '../data/constants';
-import { loginResponse } from '../../../store/asyncActions';
+import { getList } from '../../../store/asyncActions';
+// import { loginResponse } from '../../../store/asyncActions';
 
 export function getLoginData(email, password) {
   const headRequest = {
@@ -19,4 +20,4 @@ export function getLoginData(email, password) {
   return fetch(apiEndPoints.login, headRequest);
 }
 
-export const getLoginResponseAction = loginResponse(LOGIN, getLoginData);
+export const getLoginResponseAction = getList(LOGIN, getLoginData);

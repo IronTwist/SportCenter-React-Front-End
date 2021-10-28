@@ -19,7 +19,7 @@ export function getPrograms(data) {
 export const getProgramsListAction = getList(PROGRAMS, getPrograms);
 
 export function deleteProgramById(id) {
-  const url = `${apiEndPoints.programs}${id}`;
+  const url = `${apiEndPoints.programs}/${id}`;
 
   const { login } = myStore.getState();
   const token = `Bearer ${login.data.token}`;
@@ -69,7 +69,7 @@ export function addProgram(name, startsAt, endsAt) {
 export const addProgramAction = postData(PROGRAMS, addProgram);
 
 export function updateProgram(id, name, startsAt, endsAt) {
-  const url = `${apiEndPoints.programs}${id}`;
+  const url = `${apiEndPoints.programs}/${id}`;
   const { login } = myStore.getState();
   const token = `Bearer ${login.data.token}`;
 
@@ -91,7 +91,7 @@ export function updateProgram(id, name, startsAt, endsAt) {
 export const updateProgramAction = updateData(PROGRAMS, updateProgram);
 
 export function getProgram(id) {
-  const url = `${apiEndPoints.programs}${id}`;
+  const url = `${apiEndPoints.programs}/${id}`;
   const headRequest = {
     method: 'GET',
     headers: {

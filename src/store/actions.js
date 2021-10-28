@@ -1,20 +1,3 @@
-//* ***********************************************Login
-export const getLoginSuccess = (namespace, payload) => ({
-  type: `GET_${namespace}_SUCCESS`,
-  payload,
-});
-
-export const getLoginStart = (namespace) => ({
-  type: `GET_${namespace}_START`,
-});
-
-export const getLoginError = (namespace, error) => ({
-  type: `GET_${namespace}_ERROR`,
-  payload: error,
-});
-
-// *******************************************Programs
-
 export const getListStart = (namespace) => ({
   type: `GET_${namespace}_START`,
 });
@@ -36,6 +19,10 @@ export const removeItemSuccess = (namespace) => ({
 export const removeItemError = (namespace, error) => ({
   type: `REMOVE_${namespace}_ERROR`,
   payload: error,
+});
+
+export const addItemStart = (namespace) => ({
+  type: `ADD_${namespace}_START`,
 });
 
 export const addItemSuccess = (namespace) => ({
