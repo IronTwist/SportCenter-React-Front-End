@@ -62,6 +62,13 @@ const columns = [
     label: 'Cancel Date',
     minWidth: 170,
     align: 'right',
+    renderCell: (value) => {
+      if (typeof value !== 'string') {
+        return 'status active';
+      }
+
+      return value;
+    },
   },
 ];
 
@@ -75,7 +82,7 @@ const MaterialTablePrograms = () => {
   const { total, items } = useSelector((state) => state.domain.programs.data.list);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPerPage, setCurrentPerPage] = useState(5);
-  const totalPages = Math.ceil(total / currentPerPage);
+  const totalPages = total && Math.ceil(total / currentPerPage);
   const [loading, setLoading] = useState(false);
   const [displayList, setDisplayList] = useState([]);
 
@@ -131,6 +138,7 @@ const MaterialTablePrograms = () => {
         </FormControl>
       </Box>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        {loading && <CircularProgress sx={{ margin: '30px' }} />}
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -153,16 +161,18 @@ const MaterialTablePrograms = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {loading && <CircularProgress sx={{ margin: '30px' }} />}
               { displayList && displayList.map((row) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.label === 'Name'
+                        {column.id === 'canceledAt'
                           ? column.renderCell(value)
                           : value}
+
+                        {columns.label === 'Cancel Date'
+                          ? column.renderCell(value) : null }
                       </TableCell>
                     );
                   })}
