@@ -19,8 +19,8 @@ import {
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
-import { BiDownArrow, BiUpArrow } from 'react-icons/all';
 import { getProgramsListAction } from '../../program/store/actions';
+import { sortByName, sortColumn, sortDateStartAt, sortNumberId } from '../../../data/tableSortFunctions';
 
 const columns = [
   { id: 'id',
@@ -94,100 +94,6 @@ const MaterialTablePrograms = () => {
     setDisplayList(items);
   };
 
-  const sortByName = (direction) => {
-    const list = [...displayList];
-
-    if (direction === 'asc') {
-      list.sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Name')].direction = invertDirection.asc;
-    }
-
-    if (direction === 'desc') {
-      list.sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return 1;
-        }
-        if (nameA > nameB) {
-          return -1;
-        }
-        return 0;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Name')].direction = invertDirection.desc;
-    }
-
-    itemsToDisplay(list);
-  };
-
-  const sortNumberId = (direction) => {
-    const list = [...displayList];
-
-    if (direction === 'asc') {
-      list.sort((a, b) => {
-        const idA = a.id;
-        const idB = b.id;
-
-        return idA - idB;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Id')].direction = invertDirection.asc;
-    }
-
-    if (direction === 'desc') {
-      list.sort((a, b) => {
-        const idA = a.id;
-        const idB = b.id;
-
-        return idB - idA;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Id')].direction = invertDirection.desc;
-    }
-
-    itemsToDisplay(list);
-  };
-
-  const sortDateStartAt = (direction) => {
-    const list = [...displayList];
-
-    if (direction === 'asc') {
-      list.sort((a, b) => {
-        const dateA = new Date(a.startsAt);
-        const dateB = new Date(b.startsAt);
-
-        return dateA - dateB;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Start Date')].direction = invertDirection.asc;
-    }
-
-    if (direction === 'desc') {
-      list.sort((a, b) => {
-        const dateA = new Date(a.startsAt);
-        const dateB = new Date(b.startsAt);
-
-        return dateB - dateA;
-      });
-
-      columns[columns.map((e) => e.label).indexOf('Start Date')].direction = invertDirection.desc;
-    }
-
-    itemsToDisplay(list);
-  };
-
   const perPageChange = (event) => {
     setCurrentPerPage(event.target.value);
     setCurrentPage(1);
@@ -236,20 +142,12 @@ const MaterialTablePrograms = () => {
                     style={{ minWidth: column.minWidth }}
                   >
                     {column.label}
-                    {(column.sort === 'id' && column.direction === 'asc')
-                    && <BiDownArrow onClick={() => sortNumberId('asc')}/>}
-                    {(column.sort === 'id' && column.direction === 'desc')
-                    && <BiUpArrow onClick={() => sortNumberId('desc')}/>}
-
-                    {(column.sort === 'name' && column.direction === 'asc')
-                    && <BiDownArrow onClick={() => sortByName('asc')}/>}
-                    {(column.sort === 'name' && column.direction === 'desc')
-                    && <BiUpArrow onClick={() => sortByName('desc')}/>}
-
-                    {(column.sort === 'startAt' && column.direction === 'asc')
-                    && <BiDownArrow onClick={() => sortDateStartAt('asc')}/>}
-                    {(column.sort === 'startAt' && column.direction === 'desc')
-                    && <BiUpArrow onClick={() => sortDateStartAt('desc')}/>}
+                    {sortColumn('id', sortNumberId, column, displayList,
+                      itemsToDisplay, columns, invertDirection)}
+                    {sortColumn('name', sortByName, column, displayList,
+                      itemsToDisplay, columns, invertDirection)}
+                    {sortColumn('startAt', sortDateStartAt, column, displayList,
+                      itemsToDisplay, columns, invertDirection)}
                   </TableCell>
                 ))}
               </TableRow>

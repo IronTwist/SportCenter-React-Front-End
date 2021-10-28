@@ -5,7 +5,7 @@ const useUser = () => {
 
   return {
     user,
-    isAdmin: !!user.roles.find((e) => e === 'ROLE_ADMIN'),
+    isAdmin: !!user?.roles.find((e) => e === 'ROLE_ADMIN'),
   };
 };
 

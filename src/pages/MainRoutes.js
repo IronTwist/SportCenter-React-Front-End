@@ -2,7 +2,6 @@ import React from 'react';
 
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
 import Home from './Home';
 import About from './About';
 import Navbar from './Navbar';
@@ -14,9 +13,10 @@ import UsersPage from '../modules/user/pages/UsersPage';
 import Logout from '../modules/logout/Logout';
 import ProgramsDrawerPage from './drawer/ProgramsDrawerPage';
 import GridProgramsDrawerPage from './drawer/GridProgramDrowerPage';
+import useUser from '../modules/user/hooks/useUser';
 
 const ReactRouterSetup = () => {
-  const { user } = useSelector((store) => store.login.data);
+  const { user } = useUser();
 
   if (!user) {
     return (
