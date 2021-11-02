@@ -51,7 +51,7 @@ const Program = () => {
               <button type="button" className="btn btn-primary">Enroll</button>
             </div>
             <div className="card-footer text-muted">
-              ex: starts in 2 days ago
+              ex: starts in # days
             </div>
           </div><br/><br/><br/>
         </div>

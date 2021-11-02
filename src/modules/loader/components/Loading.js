@@ -1,7 +1,7 @@
 import React from 'react';
 import { CircularProgress } from '@mui/material';
 import PropTypes from 'prop-types';
-import '../../../css/Overlay.css';
+import '../../../css/Overlay.scss';
 
 const Loading = ({ children, show }) => (
   <>

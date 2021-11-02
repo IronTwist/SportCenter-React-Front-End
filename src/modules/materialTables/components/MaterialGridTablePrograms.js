@@ -10,7 +10,7 @@ const MaterialGridTablePrograms = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState(items);
   const [loading, setLoading] = useState(false);
 
   const dispatchList = () => {
@@ -28,7 +28,6 @@ const MaterialGridTablePrograms = () => {
   useEffect(() => {
     dispatchList();
   }, []);
-
 
   const columns = [
     {
@@ -59,10 +58,10 @@ const MaterialGridTablePrograms = () => {
   ];
 
   // eslint-disable-next-line no-console
-  console.log(rows);
+  console.log(page);
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400 }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -72,9 +71,12 @@ const MaterialGridTablePrograms = () => {
         rowCount={total}
         paginationMode="server"
         onPageChange={(newPage) => {
-          setPage(newPage);
+          // eslint-disable-next-line no-console
+          // console.log(newPage + 1);
+          setPage(newPage + 1);
         }}
         loading={loading}
+        style={{ backgroundColor: 'white' }}
       />
     </div>
   );

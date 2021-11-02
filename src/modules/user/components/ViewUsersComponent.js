@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../../css/TableUsers.css';
+import '../../../css/TableUsers.scss';
 import { Dropdown } from 'react-bootstrap';
 import { BiEdit, FcContacts, FiTrash } from 'react-icons/all';
 import PropTypes from 'prop-types';

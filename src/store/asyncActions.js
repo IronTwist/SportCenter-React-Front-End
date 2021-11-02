@@ -1,7 +1,7 @@
 import {
   addItemError, addItemStart, addItemSuccess, getItemError, getItemSuccess,
   getListError, getListStart, getListSuccess,
-  removeItemError, removeItemSuccess, updateItemError, updateItemSuccess,
+  removeItemError, removeItemStart, removeItemSuccess, updateItemError, updateItemSuccess,
 } from './actions';
 
 export const getList = (namespace, fn) => (...params) => (dispatch) => {
@@ -18,16 +18,20 @@ export const getList = (namespace, fn) => (...params) => (dispatch) => {
     });
 };
 
-export const deleteItem = (namespace, fn) => (...params) => (dispatch) => fn(...params)
-  .then((response) => response.json())
-  .then((responseJSON) => {
-    dispatch(removeItemSuccess(namespace, responseJSON));
-    return responseJSON;
-  })
-  .catch((error) => {
-    dispatch(removeItemError(namespace, error.message));
-    return Promise.reject(error);
-  });
+export const deleteItem = (namespace, fn) => (...params) => (dispatch) => {
+  removeItemStart(namespace);
+  return fn(...params)
+    .then((response) => response.json())
+    .then((responseJSON) => {
+      dispatch(removeItemSuccess(namespace, responseJSON));
+      return responseJSON;
+    })
+    .catch((error) => {
+      dispatch(removeItemError(namespace, error.message));
+      return Promise.reject(error);
+    });
+};
+
 
 export const postData = (namespace, fn) => (...params) => (dispatch) => {
   dispatch(addItemStart(namespace));

@@ -1,0 +1,22 @@
+@import "./variables";
+
+@mixin linkStyle {
+    a {
+        text-decoration: none;
+        &:hover {
+            color: orange;
+        }
+    }
+}
+
+.programBoxColor{
+    background-color: $program-background-color;
+    margin: 10px;
+    border-radius: 0.8em;
+
+    div {
+        color: black;
+    }
+
+    @include linkStyle();
+}

@@ -11,7 +11,7 @@ import {
   GET_USERS_ERROR,
   GET_USERS_START,
   GET_USERS_SUCCESS,
-  REMOVE_USERS_ERROR, REMOVE_USERS_SUCCESS,
+  REMOVE_USERS_ERROR, REMOVE_USERS_START, REMOVE_USERS_SUCCESS,
 } from '../../modules/user/store/constants';
 
 export const initialState = {
@@ -184,9 +184,21 @@ export const domainReducer = (state = initialState, action) => {
           error: action.payload,
         },
       };
+    case REMOVE_USERS_START:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loading: true,
+        },
+      };
     case REMOVE_USERS_SUCCESS:
       return {
         ...state,
+        users: {
+          ...state.users,
+          loading: false,
+        },
       };
     case REMOVE_USERS_ERROR:
       return {

@@ -12,6 +12,10 @@ export const getListError = (namespace, error) => ({
   payload: error,
 });
 
+export const removeItemStart = (namespace) => ({
+  type: `REMOVE_${namespace}_START`,
+});
+
 export const removeItemSuccess = (namespace) => ({
   type: `REMOVE_${namespace}_SUCCESS`,
 });

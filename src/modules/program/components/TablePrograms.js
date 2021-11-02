@@ -2,7 +2,7 @@ import React from 'react';
 
 import moment from 'moment';
 import { Button } from 'react-bootstrap';
-import '../../../css/TablePrograms.css';
+import '../../../css/TablePrograms.scss';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UpdateProgram from './UpdateProgram';
